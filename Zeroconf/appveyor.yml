@@ -1,0 +1,28 @@
+image: Visual Studio 2017
+
+environment:
+  SignClientSecret:
+    secure: S26+NphAhj/vo5ZdHd/N/4toty3ztdNGmuNdvAB57W1oIVQEHVKqAVuhTD8B9ATy
+     
+install: 
+  - cmd: nuget install gitlink -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion -pre
+  - cmd: nuget install SignClient -Version 0.7.0 -SolutionDir %APPVEYOR_BUILD_FOLDER% -Verbosity quiet -ExcludeVersion
+    
+build_script:
+  - cmd: msbuild Zeroconf\Zeroconf.csproj /t:restore
+  - cmd: msbuild Zeroconf\Zeroconf.csproj /t:pack /p:Configuration=Release /p:NuGetBuildTasksPackTargets="workaround"
+  
+after_build:
+  - cmd: move Zeroconf\bin\Release\*.nupkg .
+  - ps: '.\SignClient\Sign-Package.ps1'
+
+artifacts:
+  - path: '*.nupkg'
+  
+deploy:
+  provider: NuGet
+  server: https://www.myget.org/F/zeroconf/api/v2/package
+  symbol_server: https://www.myget.org/F/zeroconf/symbols/api/v2/package
+  api_key:
+    secure: bmqlJK8a5HYiUXOT99HXT1j7JiM5+fpR4kHhxIC30oaaEXbv94f0fKdiKlU1QC/l
+  artifact: /.*\.nupkg/
