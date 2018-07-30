@@ -1,11 +1,8 @@
-﻿using System;
-using Android.App;
+﻿using Android.App;
 using Android.Content;
-using Android.Runtime;
-using Android.Views;
 using Android.Webkit;
-using Android.Widget;
 using Android.OS;
+using Android.Util;
 
 namespace com.chham.FindMyDuet
 {
@@ -20,12 +17,12 @@ namespace com.chham.FindMyDuet
             SetContentView(Resource.Layout.Browser);
 
             // Prepare WebView
-            WebView webView = FindViewById<WebView>(Resource.Id.webView);
-            webView.Settings.CacheMode = CacheModes.NoCache;
+            WebView webView = FindViewById<WebView>(Resource.Id.webContent);
+            webView.Settings.CacheMode = CacheModes.Normal;
             webView.Settings.JavaScriptEnabled = true;
             webView.Settings.DomStorageEnabled = true;
-            webView.Settings.LoadWithOverviewMode = true;
-            webView.Settings.UseWideViewPort = true;
+            webView.Settings.UseWideViewPort = Build.VERSION.SdkInt != BuildVersionCodes.M;
+            webView.Settings.LoadWithOverviewMode = Build.VERSION.SdkInt != BuildVersionCodes.M;
 
 #if DEBUG
             // Enable debugging in the debug configuration
@@ -42,7 +39,7 @@ namespace com.chham.FindMyDuet
             base.OnStart();
 
             // Navigate to the selected board
-            WebView webView = FindViewById<WebView>(Resource.Id.webView);
+            WebView webView = FindViewById<WebView>(Resource.Id.webContent);
             webView.LoadUrl("http://" + Intent.GetStringExtra("ip"));
         }
     }

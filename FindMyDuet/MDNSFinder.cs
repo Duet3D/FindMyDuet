@@ -22,6 +22,15 @@ namespace com.chham.FindMyDuet
         {
             return DisplayName;
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is DuetBoard)
+            {
+                return IPAddress.Equals((obj as DuetBoard).IPAddress);
+            }
+            return false;
+        }
     }
 
     public class MDNSFinder
@@ -79,7 +88,11 @@ namespace com.chham.FindMyDuet
                     }
 
                     DuetBoard board = new DuetBoard(displayName, host.IPAddress);
-                    Boards.Add(board);
+                    if (!Boards.Contains(board))
+                    {
+                        // Sometimes we get two boards of the same IP address
+                        Boards.Add(board);
+                    }
                 }
             }
         }

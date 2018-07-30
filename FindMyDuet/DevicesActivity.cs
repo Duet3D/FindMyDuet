@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using Android.Net.Wifi;
+using System.Linq;
 
 namespace com.chham.FindMyDuet
 {
@@ -82,8 +83,8 @@ namespace com.chham.FindMyDuet
             RunOnUiThread(() =>
             {
                 SetScanState(false);
-                FindViewById<ListView>(Resource.Id.lvDevices).Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, finder.Boards);
 
+                FindViewById<ListView>(Resource.Id.lvDevices).Adapter = new ArrayAdapter(this, Android.Resource.Layout.SimpleListItem1, finder.Boards.ToList());
                 if (firstStart && finder.Boards.Count == 1)
                 {
                     // If the app is starting and there is only one device available, connect to it immediately
