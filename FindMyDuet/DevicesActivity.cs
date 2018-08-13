@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace com.chham.FindMyDuet
 {
-    [Activity(Label = "Find My Duet", MainLauncher = true)]
+    [Activity(Label = "H-Series Control", MainLauncher = true)]
     public class DevicesActivity : Activity
     {
         private WifiManager wifi;

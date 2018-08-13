@@ -6,7 +6,7 @@ using Android.Util;
 
 namespace com.chham.FindMyDuet
 {
-    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "Find My Duet")]
+    [Activity(Theme = "@android:style/Theme.DeviceDefault.NoActionBar", Label = "H-Series Control")]
     public class BrowserActivity : Activity
     {
         protected override void OnCreate(Bundle bundle)
