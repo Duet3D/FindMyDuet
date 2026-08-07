@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="Hello">Hello World, Click Me!</string>
-    <string name="ApplicationName">FindMyDuet</string>
+    <string name="ApplicationName">Find My Duet</string>
+    <string name="Scanning">Scanning...</string>
+    <string name="NoDevices">No Devices Found!</string>
+    <string name="NoDevicesComment">Please make sure your WiFi is enabled and your Duet is connected to your network.</string>
+    <string name="ScanNetwork">Scan Network</string>
+    <string name="ScanFailed">Error: Failed to scan network (%1$s)</string>
+    <string name="NoBrowser">Could not find an app to open this link</string>
+    <string name="StoragePermissionRequired">Files can only be saved if storage access is granted</string>
+    <string name="FileSaved">Saved %1$s to Downloads</string>
+    <string name="FileNotSaved">Could not save %1$s</string>
 </resources>
